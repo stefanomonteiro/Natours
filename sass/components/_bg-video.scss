@@ -1,0 +1,16 @@
+.bg-video{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    opacity: .15;
+    overflow: hidden;
+
+    &__content{
+        height: 100%;
+        width: 100%;
+        object-fit: cover; // similar to background-size// object-fit:cover does that the element fill the entire parent while still maintaning its aspect ratio and the part that don't fit is clipped off.
+    }
+}

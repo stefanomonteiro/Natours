@@ -1,0 +1,64 @@
+// Basic definitions of our projects
+
+
+*,
+*::after,
+*::before{ /* Reset any browser default settings such as Margin and Padding. Avoiding Cross browser differences. */
+  margin: 0;
+  padding:0;
+  box-sizing: inherit;
+}
+
+html{
+    font-size: 62.5%; /* Changing the Root font-size to 10px in order to facilitate the use of REM. Now 1rem equals 10px(the root font-size). However, if we set this unit as px it will overwrite the default browser font-size (some people change it manually - bad sigth etc.). So, the better practice is to set it as percentage. 62.5% is equivalent to 10px, once the default browser f-size is 16px */
+
+    @include respond(tab-land){
+        font-size: 56.25%; // 1rem = 9px, 9/16 = 56.25%
+    }
+
+    @include respond(tab-port){ // the last one is the one applied in case of conflit.
+        font-size: 50%; // 1rem = 8px, 8/16 = 50%
+    }
+
+    // @include respond(phone){
+    //     font-size: 50%;
+    // }
+
+    @include respond(big-desktop){
+        font-size: 75%; // 1rem = 12px, 12/16 = 75%
+    }
+}
+
+body{
+    box-sizing: border-box; /* Today, the current versions of all browsers use the original "width or height + padding + border = actual width or height" box model. With box-sizing: border-box;, we can change the box model to what was once the "quirky" way, where an element's specified width and height aren't affected by padding or borders. This has proven so useful in responsive design that it's found its way into reset styles. */
+    padding: 3rem;
+    /* 30px; */
+    /* gives the white border around the website */
+
+    @include respond(tab-port){
+        padding: 0;
+    }
+}
+
+//Changing the Selction text default blue color
+::selection{
+    background-color: $color-primary;
+    color: $color-white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,33 @@
+// All the variables go in this file
+//Colors
+$color-primary: #55c57a;
+$color-primary-light: #7ed56f;
+$color-primary-dark: #28b485;
+
+$color-secondary-light: #ffb900;
+$color-secondary-dark: #ff7730;
+
+$color-terciary-light: #2998ff;
+$color-terciary-dark: #5643fa;
+
+
+
+$color-grey-light-1: #f7f7f7;
+$color-grey-light-2: #eee;
+
+$color-gray-dark: #777;
+$color-gray-dark-2: #999;
+$color-gray-dark-3: #333;
+
+$color-white: #fff;
+$color-black: #000;
+
+//Font Sizes
+$default-font-size: 1.6rem;
+
+
+// Grid
+$grid-width: 114rem; //Standard is to set it at 1140px (114rem); MAX_WIDTH means that if we have enough space width is 114rem, however if viewport is smaller widht will fill 100% of space
+$gutter-vertical: 8rem; // margin-bottom
+$gutter-vertical-small: 6rem; // margin-bottom
+$gutter-horizontal: 6rem; //space between collumns

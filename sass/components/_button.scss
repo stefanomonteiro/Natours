@@ -1,0 +1,118 @@
+
+.btn{
+    &,
+    &:link,
+    &:visited{   /* Pseudo-classes are special states of a selector. We use pseudo-classes to style elements under a special condition*/
+        font-size: $default-font-size;
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 1.5rem 4rem;
+        display: inline-block; /*  note that in order for this to look as button, we have to change the element to an inline-block, by using display: inline-block; , so the anchor no longer behaves just like text, but also like a block element, able to accept margins and paddings of all kind. */
+        border-radius: 10rem;
+        transition: all .2s;
+        position: relative; /* This is set so the pseudo button (.btn::after) can be hidden behind using position:absolute */
+
+        //changes for the <button> element
+        border: none;
+        cursor: pointer;
+    }
+
+    &:hover{
+        transform: translateY(-3px); /* make button move up when hover */
+        box-shadow: 0 1rem 2rem rgba($color-black,.2); /* X direction / Y direction / Blur / Color and Transparence */
+
+            &::after{ /* Reads: When we hover the button(.btn) we want some certain styles for the pseudo element (.btn::after) */
+        transform: scaleX(1.4) scaleY(1.6);
+        opacity: 0;
+    }
+    }
+
+    &:active,
+    &:focus {/* When clicked */
+        outline-style: none;
+        transform: translateY(-1px);
+        box-shadow: 0 .5rem 1rem rgba($color-black,.2);
+    }
+
+    &--white{
+        background-color: $color-white;
+        color: $color-gray-dark;
+
+        &::after{
+            background-color: $color-white;
+        }
+
+    }
+
+    &--green{
+        background-color: $color-primary;
+        color: $color-white;
+
+        &::after{
+            background-color: $color-primary;
+        }
+
+    }
+
+    /* Pseudo Elements allow us to style certain parts of the elements.
+    The AFTER pseudo element ADDS LIKE A VIRTUAL ELEMENT right after the element that we are selecting. And we can then style that element */
+
+    /* The trick is to create an element that looks exactly like the button and put it behind it. Then animate it when hover and */
+    &::after{
+        content: ''; /* In order to appear in the page it needs the content property, even if empty */
+        display: inline-block; /* Same as above. It needs a display property to appear. Use the same as the original .btn */
+        height: 100%;
+        width: 100%;/* Pseudo Elements are treated like a child of the Origin Element (.btn). So Height and witdh os 100% of the Parent .btn */
+        border-radius:10rem;
+        position: absolute; /* This will make the pseudo element displays behind the parent. Beacuse position:absolute needs to have a reference and its reference is the first position:relative element it finds. We need to set its parent (.btn) position property to relative. */
+        top: 0;
+        left: 0;/* Top and Left in relation to the Parent Element (.btn) */
+        z-index: -1;
+        transition: all .4s;
+    }
+
+
+    &--animated{
+        animation: moveInBottom .5s ease-out .75s;
+        animation-fill-mode: backwards;
+        /* The animation-fill-mode property specifies a style for the element when the animation is not playing (before it starts, after it ends, or both).
+        - forwards    The element will retain the style values that is set by the last keyframe (depends on animation-direction and animation-iteration-count)
+        - backwards   The element will get the style values that is set by the first keyframe (depends on animation-direction), and retain this during the animation-delay period
+        - both    The animation will follow the rules for both forwards and backwards, extending the animation properties in both directions */
+    }
+}
+
+.btn-text{
+    &:link,
+    &:visited{
+        font-size: $default-font-size;
+        color: $color-primary;
+        display: inline-block; //So we can use the box-model properties such padding, margin etc.
+        text-decoration: none;
+        border-bottom: 1px solid $color-primary;
+        padding: 3px; //when px is so small not need to use rem. When it rounds up is the same.
+
+        transition: all .2s;
+    }
+
+    &:hover{
+        background-color: $color-primary;
+        color: $color-white;
+        box-shadow: 0 1rem 2rem rgba($color-black, .15);
+        transform: translateY(-2px);
+    }
+
+    &:active{
+        box-shadow: 0 .5rem 1rem rgba($color-black, .15);
+        transform: translateY(0);
+    }
+}
+
+
+
+
+
+
+
+
+

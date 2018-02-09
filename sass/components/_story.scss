@@ -1,0 +1,109 @@
+.story{
+    width: 75%;
+    margin: 0 auto;//block element inside block element
+    box-shadow: 0 3rem 6rem rgba($color-black, .1);
+    background-color: rgba($color-white, .6);
+    border-radius: 3px;
+    padding: 6rem;
+    padding-left: 9rem;
+    font-size: $default-font-size;
+    transform: skewX(-12deg);
+
+    @include respond(tab-port){
+        width: 100%;
+        padding: 4rem;
+        padding-left: 7rem;
+    }
+
+    @include respond(phone){
+    transform: skewX(0);
+    }
+
+
+    /**  DO NOT WORK  as section_features because of the transform/translate in __shape (one overwrite the other). So add this to both __text and to the __shape individually.
+
+        & > * { //selects the story__shape and story__img
+            transform: skewX(12deg);
+        }
+     *
+     */
+
+
+
+    &__shape{
+        width: 15rem;
+        height: 15rem;
+        float: left; //In order to make the rest of the elements to float around it
+        -webkit-shape-outside: circle(50% at 50% 50%);
+        shape-outside: circle(50% at 50% 50%);// radius of circle (50% = 1/2 of hieght and width (7.5rem))// this property requires tje width/height and float properties.
+        -webkit-clip-path: circle(50% at 50% 50%);
+        clip-path: circle(50% at 50% 50%);
+        transform: translateX(-3rem) skewX(12deg); //best way to position an element that is floated is using transform/translate
+        position: relative;
+        overflow: hidden; //fixes the error caused when transition was added to __img
+
+        @include respond(phone){
+            transform: translateX(-3rem) skewX(0);
+        }
+    }
+
+    &__img{
+        height: 100%; //100% of its parent story__shape (15rem)
+        transform: translateX(-4rem) scale(1.4);
+        backface-visibility: hidden; //fix glitches
+        transition: all .5s;
+    }
+
+    &__text{
+        transform: skewX(12deg);
+
+        @include respond(phone){
+            transform: skewX(0);
+        }
+    }
+
+    &__caption{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 20%);
+        color: $color-white;
+        text-transform: uppercase;
+        font-size: 1.7rem;
+        text-align: center;
+        opacity: 0;//initial state before hover
+        transition: all .5s;
+        backface-visibility: hidden; //fix glitches
+    }
+
+    &:hover &__caption{ //as soon as story is hover change the __caption
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+
+    &:hover &__img{
+        transform: translateX(-4rem) scale(1);
+        filter: blur(3px) brightness(80%);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

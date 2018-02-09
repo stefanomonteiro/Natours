@@ -1,0 +1,52 @@
+
+
+@mixin clearfix{ //ClearFix append a pseudo element after the element which will then clear these floats
+    &::after{
+        content:""; //content property so the pseudo element will mot appear on the page. Empty beacuse we don't want to see it.
+        display: table; // standars version of clearfix, use display:table;
+        clear: both; //clear both float, left or right;
+    }
+}
+
+@mixin absCenter {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+// MEDIA QUERY MANAGER
+/*
+0-600px:        Phone
+600-900px:      Tablet Portrait
+900-1200px:     Tablet Landscape
+
+[1200px-1800px] is where our normal style applies
+
+1800px +:       Big Desktop
+
+
+ORDER (to apply the Med Queries): Base + Typography > General Layout + Grid > Page Layout > Components
+
+*/
+
+// Media Queries are not afected with px, in case user change their browser settings. However, EM are better option than REM when Media Queries.
+@mixin respond($breakpoint){
+
+    @if $breakpoint == phone{
+        @media only screen and (max-width: 37.5em) { @content};//600px //@content is a block of code we will pass when using the mixin.
+    }
+
+    @if $breakpoint == tab-port{
+        @media only screen and (max-width: 56.25em) { @content};//900px
+    }
+
+    @if $breakpoint == tab-land{
+        @media only screen and (max-width: 75em) { @content};//1200px
+    }
+
+    @if $breakpoint == big-desktop{
+        @media only screen and (min-width: 112.5em) { @content};//1800px
+    }
+}

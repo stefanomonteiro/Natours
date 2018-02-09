@@ -1,0 +1,234 @@
+
+
+/* That is our css file before using Sass and the BEM system */
+
+
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+*/
+
+
+*,
+*::after,
+*::before{ /* Reset any browser default settings such as Margin and Padding. Avoiding Cross browser differences. */
+  margin: 0;
+  padding:0;
+  box-sizing: inherit;
+}
+
+html{
+    font-size: 62.5%; /* Changing the Root font-size to 10px in order to facilitate the use of REM. Now 1rem equals 10px(the root font-size). However, if we set this unit as px it will overwrite the default browser font-size (some people change it manually - bad sigth etc.). So, the better practice is to set it as percentage. 62.5% is equivalent to 10px, once the default browser f-size is 16px */
+}
+
+body{ /* Reset any font property within the body */
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    /*font-size: 16px;*/
+    line-height: 1.7;
+    color: #777;
+    padding: 3rem;/* 30px; *//* gives the white border around the website */
+
+    box-sizing: border-box; /* Today, the current versions of all browsers use the original "width or height + padding + border = actual width or height" box model. With box-sizing: border-box;, we can change the box model to what was once the "quirky" way, where an element's specified width and height aren't affected by padding or borders. This has proven so useful in responsive design that it's found its way into reset styles. */
+
+}
+
+.header{
+    height: 95vh; /* 95% of Viewport Heigh */
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(126, 213, 111, 0.8),
+        rgba(40, 180, 131, 0.8)),
+    url(../img/hero.jpg);
+    background-size: cover; /* cover: try to fit the element inside the box */
+    background-position: top;/* set how image will be cropped as size changes. top: won't crop top, center: will crop sides equally */
+    position: relative;
+
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); /* https://css-tricks.com/almanac/properties/c/clip/ */
+    /*clip-path: circle(50% at left);*/
+    /*clip-path: ellipse(60% 20% at center);*/
+    /*clip-path: inset(100px 50px);*/
+}
+
+.logo-box{
+    position: absolute; /* absolute position needs to have a reference. The reference is the first element with the relative position it can find up in his parent tree */
+    top: 4rem; /* 40px */
+    left: 4rem; /* 40px; */
+}
+
+.logo{
+    height: 3.5rem;/* 35px; */
+    backface-visibility: hidden;
+}
+
+.text-box{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);/* It shifts the element 50% of its heigh and width ////  The transform property allows you to visually manipulate an element by skewing, rotating, translating, or scaling. https://css-tricks.com/almanac/properties/t/transform/*/
+    text-align: center;/* Align the Text and in this case the button as well. The button was set to display:inline-block, so it is treated as it was a text element. */
+}
+
+.heading-primary{
+    color: #FFF;
+    text-transform: uppercase;
+    margin-bottom: 6rem;
+
+    /*backface-visibility: hidden; //// Used in the video to fix a bug at the end of animation @ 12 minutes*/
+}
+
+.heading-primary-main{
+    display: block;/* display text under the other. Block display occupy the entire width they have available and crete line breaks after and before them. <span> default display is inline */
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+
+    /*Other Animation Properties*/
+    /*animation-delay: 3s;*/
+    /*animation-iteration-count: 3;*/
+}
+
+.heading-primary-sub{
+    display: block;/* display text under the other. Block display occupy the entire width they have available and crete line breaks after and before them. <span> default display is inline */
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.75rem;
+
+/*    animation-name: moveInRight;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;*/
+
+    animation: moveInRight 1s ease-out;
+}
+
+@keyframes moveInLeft{
+    0%{
+        opacity: 0;
+        transform: translateX(-10rem);
+    }
+
+    80%{
+        transform: translateX(1rem);
+    }
+
+    100%{
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+@keyframes moveInRight{
+    0%{
+        opacity: 0;
+        transform: translateX(10rem);
+    }
+
+    80%{
+        transform: translateX(-1rem);
+    }
+
+    100%{
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+@keyframes moveInBottom{
+    0%{
+        opacity: 0;
+        transform: translateY(3rem);
+    }
+
+    100%{
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+.btn:link,
+.btn:visited{   /* Pseudo-classes are special states of a selector. We use pseudo-classes to style elements under a special condition*/
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block; /*  note that in order for this to look as button, we have to change the element to an inline-block, by using display: inline-block; , so the anchor no longer behaves just like text, but also like a block element, able to accept margins and paddings of all kind. */
+    border-radius: 10rem;
+    transition: all .2s;
+    position: relative; /* This is set so the pseudo button (.btn::after) can be hidden behind using position:absolute */
+}
+
+.btn:hover{
+    transform: translateY(-3px); /* make button move up when hover */
+    box-shadow: 0 1rem 2rem rgba(0,0,0,.2); /* X direction / Y direction / Blur / Color and Transparence */
+}
+
+.btn:active{/* When clicked */
+    transform: translateY(-1px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.2);
+}
+
+.btn-white{
+    background-color: #FFF;
+    color: #777;
+
+}
+
+/* Pseudo Elements allow us to style certain parts of the elements.
+The AFTER pseudo element ADDS LIKE A VIRTUAL ELEMENT right after the element that we are selecting. And we can then style that element */
+
+/* The trick is to create an element that looks exactly like the button and put it behind it. Then animate it when hover and */
+.btn::after{
+    content: ''; /* In order to appear in the page it needs the content property, even if empty */
+    display: inline-block; /* Same as above. It needs a display property to appear. Use the same as the original .btn */
+    height: 100%;
+    width: 100%;/* Pseudo Elements are treated like a child of the Origin Element (.btn). So Height and witdh os 100% of the Parent .btn */
+    border-radius:10rem;
+    position: absolute; /* This will make the pseudo element displays behind the parent. Beacuse position:absolute needs to have a reference and its reference is the first position:relative element it finds. We need to set its parent (.btn) position property to relative. */
+    top: 0;
+    left: 0;/* Top and Left in relation to the Parent Element (.btn) */
+    z-index: -1;
+    transition: all .4s;
+}
+
+.btn-white::after{
+    background-color: #FFF;
+}
+
+.btn:hover::after{ /* Reads: When we hover the button(.btn) we want some certain styles for the pseudo element (.btn::after) */
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+}
+
+.btn-animated{
+    animation: moveInBottom .5s ease-out .75s;
+    animation-fill-mode: backwards;
+    /* The animation-fill-mode property specifies a style for the element when the animation is not playing (before it starts, after it ends, or both).
+    - forwards    The element will retain the style values that is set by the last keyframe (depends on animation-direction and animation-iteration-count)
+    - backwards   The element will get the style values that is set by the first keyframe (depends on animation-direction), and retain this during the animation-delay period
+    - both    The animation will follow the rules for both forwards and backwards, extending the animation properties in both directions */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
